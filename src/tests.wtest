@@ -1,0 +1,68 @@
+import personajes.*
+import casa.*
+import ciudades.*
+import estado.*
+
+object fixture{
+	
+	method personajeDeLannister(){
+		return new Personaje(lannister, [], vivo, [])
+	}
+	
+	method personajeDeStark(){
+		return new Personaje(stark, [], vivo, [])
+	}
+	
+	method personajeDeGuardiaDeLaNoche(){
+		return new Personaje(guardiaDeLaNoche, [], vivo, [])
+	}
+	
+	method personajeDeLannisterConConyuges(){
+		return new Personaje(lannister, [self.personajeDeStark(), self.personajeDeLannister()], vivo, [])
+	}
+}
+
+test "La casa Lannister le permite casarse"{
+	var personajeDeLannister = fixture.personajeDeLannister()
+	assert.that(lannister.permiteCasamientoDe(personajeDeLannister))
+}
+
+test "La casa Lannister no le permite casarse por tener conyugues"{
+	var personajeDeLannister = fixture.personajeDeLannisterConConyuges()
+	assert.notThat(lannister.permiteCasamientoDe(personajeDeLannister))
+}
+
+test "La casa Stark no le permite casarse con alguien que es de Stark"{
+	var personajeDeStark = fixture.personajeDeStark()
+	assert.notThat(stark.permiteCasamientoCon(personajeDeStark))
+}
+
+test "La casa Guardia de la Noche no le permite casarse"{
+	var personajeDeGuardia = fixture.personajeDeGuardiaDeLaNoche()
+	assert.notThat(guardiaDeLaNoche.permiteCasamientoDe(personajeDeGuardia))
+}
+
+test "Dos personajes se casan porque sus casas los dejan"{
+	var personajeDeLannister = fixture.personajeDeLannister()
+	var personajeDeStark = fixture.personajeDeStark()
+	personajeDeLannister.casarseCon(personajeDeStark)
+	assert.notThat(personajeDeLannister.conyugues().isEmpty())
+}
+
+test "Dos personajes no se casan porque una de sus casas no lo deja"{
+	var personajeDeStark = fixture.personajeDeStark()
+	var otroPersonajeDeStark = fixture.personajeDeStark()
+	personajeDeStark.casarseCon(otroPersonajeDeStark)
+	assert.throwsException("No pueden casarse")
+}
+
+test "La casa Lannister es rica por tener mas de 1000 monedas"{
+	assert.that(lannister.esRica())
+}
+
+test "La casa Guardia de al Noche no es rica por tener menos de 1000 monedas"{
+	assert.notThat(guardiaDeLaNoche.esRica())
+}
+
+
+
