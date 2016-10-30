@@ -33,7 +33,7 @@ class Conspiracion{
 	
 	method ejecutarConspiracion(){
 		ejecutada = true
-		complotados.map({unComplotado => unComplotado.personalidad().ejecutarAccionConspirativaContra(personajeObjetivo)})
+		complotados.map({unComplotado => unComplotado.ejecutarAccionConspirativaContra(personajeObjetivo)})
 	}
 }
 

@@ -18,6 +18,6 @@ class Lobo inherits Acompaniante{
 
 class LoboHuargo inherits Lobo{
 	override method esPeligroso(){
-		return false
+		return true
 	}
 }

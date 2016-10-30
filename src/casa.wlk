@@ -67,7 +67,7 @@ object stark inherits Casa(5000000, norteDePoniente){
 	}
 	
 	method permiteCasamientoCon(unaPareja){
-		return !unaPareja.casa().esStark()
+		return !unaPareja.esDeStark()
 	}
 }
 

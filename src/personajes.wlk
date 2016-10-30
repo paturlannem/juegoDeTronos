@@ -37,6 +37,10 @@ class Personaje{
 		estado = unEstado
 	}
 	
+	method esDeStark(){
+		return casa == stark
+	}
+	
 	method patrimonio(){
 		return casa.patrimonio() / casa.cantidadDeMiembros()
 	}
@@ -90,5 +94,9 @@ class Personaje{
 	
 	method esAsesinado(){
 		estado = muerto
+	}
+	
+	method ejecutarAccionConspirativaContra(unPersonaje){
+		personalidad.ejecutarAccionConspirativaContra(personajeObjetivo)
 	}
 }
